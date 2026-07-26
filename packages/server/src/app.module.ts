@@ -10,7 +10,10 @@ import { ProgressModule } from './progress/progress.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: ['.env', '../../.env'],
+    }),
     PrismaModule,
     AuthModule,
     UsersModule,

@@ -7,20 +7,25 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "npm run dev --workspaces --if-present",
+    "dev": "concurrently -n shared,server,client -c blue,green,cyan \"npm run dev --workspace @react-quest/shared\" \"npm run dev --workspace @react-quest/server\" \"npm run dev --workspace @react-quest/client\"",
     "dev:client": "npm run dev --workspace @react-quest/client",
     "dev:server": "npm run dev --workspace @react-quest/server",
+    "dev:shared": "npm run dev --workspace @react-quest/shared",
     "build": "npm run build --workspace @react-quest/shared && npm run build --workspace @react-quest/client --workspace @react-quest/server",
     "build:client": "npm run build --workspace @react-quest/shared && npm run build --workspace @react-quest/client",
     "build:server": "npm run build --workspace @react-quest/shared && npm run build --workspace @react-quest/server",
     "lint": "npm run lint --workspaces --if-present",
-    "db:generate": "npm run prisma:generate --workspace @react-quest/server",
-    "db:migrate": "npm run prisma:migrate --workspace @react-quest/server",
+    "db:generate": "prisma generate --schema=packages/server/prisma/schema.prisma",
+    "db:migrate": "prisma migrate dev --schema=packages/server/prisma/schema.prisma",
+    "db:push": "prisma db push --schema=packages/server/prisma/schema.prisma",
     "db:seed": "npm run prisma:seed --workspace @react-quest/server",
-    "db:studio": "npm run prisma:studio --workspace @react-quest/server"
+    "db:studio": "prisma studio --schema=packages/server/prisma/schema.prisma"
   },
   "engines": {
     "node": ">=20.0.0",
     "npm": ">=10.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.4"
   }
 }
