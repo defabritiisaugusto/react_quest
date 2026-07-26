@@ -10,6 +10,11 @@
     "save": "Save",
     "cancel": "Cancel"
   },
+  "landing": {
+    "tagline": "An odyssey in code",
+    "subtitle": "Learn React by completing challenges, earning XP, and leveling up on your quest.",
+    "beginQuest": "Begin the Quest"
+  },
   "auth": {
     "login": "Login",
     "register": "Register",
@@ -24,7 +29,7 @@
     "registerError": "Registration failed"
   },
   "nav": {
-    "dashboard": "Dashboard",
+    "dashboard": "Hero Hall",
     "worlds": "Worlds",
     "profile": "Profile",
     "logout": "Logout"
@@ -34,7 +39,35 @@
     "level": "Level {{level}}",
     "xp": "{{current}} / {{needed}} XP",
     "challengesCompleted": "Challenges Completed",
+    "heroLevel": "Hero Level",
+    "totalXp": "Total XP",
     "continueQuest": "Continue Your Quest"
+  },
+  "profile": {
+    "heraldry": "Heraldry",
+    "title": "Your hero",
+    "subtitle": "Customize your fantasy character appearance.",
+    "save": "Save appearance",
+    "saved": "Appearance saved!",
+    "options": {
+      "skin": "Skin",
+      "hair": "Hair",
+      "hairColor": "Hair color",
+      "eyes": "Eyes",
+      "accessory": "Accessory",
+      "outfit": "Tunic",
+      "background": "Background"
+    }
+  },
+  "worldsMap": {
+    "atlas": "Atlas",
+    "challenges": "challenges",
+    "enter": "Enter world",
+    "locked": "Locked · {{xp}} XP"
+  },
+  "levels": {
+    "start": "Start",
+    "replay": "Replay"
   },
   "worlds": {
     "reactVillage": {

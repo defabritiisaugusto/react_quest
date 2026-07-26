@@ -21,34 +21,34 @@ export function Register() {
     try {
       const data = await registerMutation.mutateAsync({ username, email, password });
       login(data.user, data.accessToken, data.refreshToken);
-      navigate('/dashboard');
+      navigate('/profile');
     } catch {
       setError(t('auth.registerError'));
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4">
-      <div className="w-full max-w-md">
-        <h1 className="text-3xl font-bold text-center mb-2 text-white">
+    <div className="min-h-screen flex items-center justify-center px-4">
+      <div className="w-full max-w-md fantasy-panel-ornate p-8">
+        <h1 className="font-display text-3xl font-bold text-center mb-2 text-parchment">
           {t('auth.registerTitle')}
         </h1>
-        <p className="text-center text-gray-500 mb-8">
+        <p className="text-center text-parchment-dim mb-8">
           {t('auth.hasAccount')}{' '}
-          <Link to="/login" className="text-primary-400 hover:underline">
+          <Link to="/login" className="fantasy-link">
             {t('auth.login')}
           </Link>
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
           {error && (
-            <div className="p-3 bg-danger-500/10 border border-danger-500/30 rounded-lg text-danger-500 text-sm">
+            <div className="p-3 bg-danger-500/10 border border-danger-500/30 rounded-md text-danger-500 text-sm">
               {error}
             </div>
           )}
 
           <div>
-            <label className="block text-sm text-gray-400 mb-1">{t('auth.username')}</label>
+            <label className="block text-sm text-parchment-dim mb-1">{t('auth.username')}</label>
             <input
               type="text"
               value={username}
@@ -56,38 +56,34 @@ export function Register() {
               required
               minLength={3}
               maxLength={20}
-              className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg text-white focus:outline-none focus:border-primary-500 transition-colors"
+              className="fantasy-input"
             />
           </div>
 
           <div>
-            <label className="block text-sm text-gray-400 mb-1">{t('auth.email')}</label>
+            <label className="block text-sm text-parchment-dim mb-1">{t('auth.email')}</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg text-white focus:outline-none focus:border-primary-500 transition-colors"
+              className="fantasy-input"
             />
           </div>
 
           <div>
-            <label className="block text-sm text-gray-400 mb-1">{t('auth.password')}</label>
+            <label className="block text-sm text-parchment-dim mb-1">{t('auth.password')}</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
               minLength={8}
-              className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg text-white focus:outline-none focus:border-primary-500 transition-colors"
+              className="fantasy-input"
             />
           </div>
 
-          <button
-            type="submit"
-            disabled={registerMutation.isPending}
-            className="w-full py-3 bg-primary-600 hover:bg-primary-500 disabled:opacity-50 text-white font-semibold rounded-lg transition-colors"
-          >
+          <button type="submit" disabled={registerMutation.isPending} className="fantasy-btn w-full py-3">
             {registerMutation.isPending ? t('common.loading') : t('auth.register')}
           </button>
         </form>

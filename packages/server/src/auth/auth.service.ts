@@ -7,6 +7,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import type { StringValue } from 'ms';
 import * as bcrypt from 'bcrypt';
+import { normalizeAvatarConfig, type AvatarConfig } from '@react-quest/shared';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -32,7 +33,14 @@ export class AuthService {
       data: { username, email, passwordHash },
     });
 
-    return this.generateTokens(user.id, user.username, user.email, user.xp, user.level);
+    return this.generateTokens(
+      user.id,
+      user.username,
+      user.email,
+      user.xp,
+      user.level,
+      normalizeAvatarConfig(user.avatarConfig),
+    );
   }
 
   async login(email: string, password: string) {
@@ -46,7 +54,14 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    return this.generateTokens(user.id, user.username, user.email, user.xp, user.level);
+    return this.generateTokens(
+      user.id,
+      user.username,
+      user.email,
+      user.xp,
+      user.level,
+      normalizeAvatarConfig(user.avatarConfig),
+    );
   }
 
   async refresh(refreshToken: string) {
@@ -58,7 +73,14 @@ export class AuthService {
       if (!user) {
         throw new UnauthorizedException();
       }
-      return this.generateTokens(user.id, user.username, user.email, user.xp, user.level);
+      return this.generateTokens(
+        user.id,
+        user.username,
+        user.email,
+        user.xp,
+        user.level,
+        normalizeAvatarConfig(user.avatarConfig),
+      );
     } catch {
       throw new UnauthorizedException('Invalid refresh token');
     }
@@ -70,6 +92,7 @@ export class AuthService {
     email: string,
     xp: number,
     level: number,
+    avatarConfig: AvatarConfig,
   ) {
     const payload = { sub: id, username };
 
@@ -82,7 +105,7 @@ export class AuthService {
     return {
       accessToken,
       refreshToken,
-      user: { id, username, email, xp, level },
+      user: { id, username, email, xp, level, avatarConfig },
     };
   }
 }

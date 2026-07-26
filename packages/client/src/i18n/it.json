@@ -10,6 +10,11 @@
     "save": "Salva",
     "cancel": "Annulla"
   },
+  "landing": {
+    "tagline": "Un'odissea nel codice",
+    "subtitle": "Impara React completando challenge, guadagnando XP e salendo di livello nella tua quest.",
+    "beginQuest": "Inizia la Quest"
+  },
   "auth": {
     "login": "Accedi",
     "register": "Registrati",
@@ -24,7 +29,7 @@
     "registerError": "Registrazione fallita"
   },
   "nav": {
-    "dashboard": "Dashboard",
+    "dashboard": "Sala dell'Eroe",
     "worlds": "Mondi",
     "profile": "Profilo",
     "logout": "Esci"
@@ -34,7 +39,35 @@
     "level": "Livello {{level}}",
     "xp": "{{current}} / {{needed}} XP",
     "challengesCompleted": "Challenge Completate",
+    "heroLevel": "Livello Eroe",
+    "totalXp": "XP Totali",
     "continueQuest": "Continua la tua Quest"
+  },
+  "profile": {
+    "heraldry": "Araldica",
+    "title": "Il tuo eroe",
+    "subtitle": "Personalizza l'aspetto fantasy del tuo personaggio.",
+    "save": "Salva aspetto",
+    "saved": "Aspetto salvato!",
+    "options": {
+      "skin": "Pelle",
+      "hair": "Capelli",
+      "hairColor": "Colore capelli",
+      "eyes": "Occhi",
+      "accessory": "Accessorio",
+      "outfit": "Tunica",
+      "background": "Sfondo"
+    }
+  },
+  "worldsMap": {
+    "atlas": "Atlante",
+    "challenges": "challenge",
+    "enter": "Entra nel mondo",
+    "locked": "Bloccato · {{xp}} XP"
+  },
+  "levels": {
+    "start": "Inizia",
+    "replay": "Rigioca"
   },
   "worlds": {
     "reactVillage": {

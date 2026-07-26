@@ -8,6 +8,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      // Point at TS source so Vite gets real ESM named exports (shared dist is CJS for Nest)
+      '@react-quest/shared': path.resolve(__dirname, '../shared/src/index.ts'),
     },
   },
   server: {

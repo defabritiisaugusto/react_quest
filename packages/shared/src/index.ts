@@ -5,5 +5,6 @@ export * from './types/challenge';
 export * from './types/progress';
 export * from './types/achievement';
 export * from './types/auth';
+export * from './types/avatar';
 export * from './constants/xp';
 export * from './constants/difficulty';

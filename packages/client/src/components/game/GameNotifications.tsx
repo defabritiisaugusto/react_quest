@@ -13,16 +13,14 @@ export function GameNotifications() {
             initial={{ opacity: 0, x: 100, scale: 0.8 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 100, scale: 0.8 }}
-            className={`px-6 py-3 rounded-xl shadow-lg backdrop-blur-sm pointer-events-auto font-medium ${
+            className={`px-6 py-3 rounded-md shadow-lg backdrop-blur-sm pointer-events-auto font-display text-sm tracking-wide ${
               n.type === 'xp'
                 ? 'bg-xp-500/20 border border-xp-500/40 text-xp-400'
                 : n.type === 'level-up'
-                  ? 'bg-accent-500/20 border border-accent-500/40 text-accent-400'
-                  : 'bg-primary-500/20 border border-primary-500/40 text-primary-400'
+                  ? 'bg-accent-500/20 border border-accent-400/40 text-accent-400'
+                  : 'bg-primary-500/20 border border-primary-400/40 text-primary-300'
             }`}
           >
-            {n.type === 'level-up' && '🎉 '}
-            {n.type === 'xp' && '⭐ '}
             {n.message}
           </motion.div>
         ))}

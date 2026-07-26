@@ -1,9 +1,12 @@
+import type { AvatarConfig } from './avatar';
+
 export interface UserDto {
   id: string;
   username: string;
   email: string;
   xp: number;
   level: number;
+  avatarConfig: AvatarConfig;
   createdAt: string;
 }
 

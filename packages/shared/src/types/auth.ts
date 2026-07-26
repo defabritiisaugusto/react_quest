@@ -1,3 +1,5 @@
+import type { AvatarConfig } from './avatar';
+
 export interface LoginDto {
   email: string;
   password: string;
@@ -18,6 +20,7 @@ export interface AuthResponseDto {
     email: string;
     xp: number;
     level: number;
+    avatarConfig: AvatarConfig;
   };
 }
 

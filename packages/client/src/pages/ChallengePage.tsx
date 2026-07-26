@@ -20,21 +20,21 @@ function fireSuccessConfetti() {
     particleCount: 100,
     spread: 70,
     origin: { y: 0.65 },
-    colors: ['#22c55e', '#4ade80', '#fbbf24', '#60a5fa', '#f472b6'],
+    colors: ['#c9a227', '#52b788', '#e8c547', '#e8e4d4', '#2d6a4f'],
   });
   confetti({
     particleCount: 50,
     angle: 60,
     spread: 55,
     origin: { x: 0, y: 0.7 },
-    colors: ['#22c55e', '#fbbf24', '#60a5fa'],
+    colors: ['#c9a227', '#52b788', '#e8e4d4'],
   });
   confetti({
     particleCount: 50,
     angle: 120,
     spread: 55,
     origin: { x: 1, y: 0.7 },
-    colors: ['#22c55e', '#fbbf24', '#60a5fa'],
+    colors: ['#c9a227', '#52b788', '#e8e4d4'],
   });
 }
 
@@ -44,7 +44,7 @@ export function ChallengePage() {
   const { data: challenge, isLoading } = useChallenge(id!);
 
   if (isLoading || !challenge) {
-    return <div className="text-center py-20 text-gray-500">{t('common.loading')}</div>;
+    return <div className="text-center py-20 text-parchment-dim">{t('common.loading')}</div>;
   }
 
   return (
@@ -148,37 +148,31 @@ function ChallengeContent({ challenge }: { challenge: ChallengeData }) {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-4 flex-wrap">
         <div>
           {challenge.level?.world && (
             <Link
               to={`/worlds/${challenge.level.world.slug}`}
-              className="text-sm text-gray-500 hover:text-white transition-colors"
+              className="text-sm text-parchment-dim hover:text-primary-300 transition-colors"
             >
               &larr; {t(challenge.level.world.titleKey)}
             </Link>
           )}
-          <h1 className="text-2xl font-bold mt-1">{t(challenge.titleKey)}</h1>
+          <h1 className="text-2xl font-bold mt-1 text-parchment">{t(challenge.titleKey)}</h1>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-xp-400 font-medium">{challenge.xpReward} XP</span>
+          <span className="text-xp-400 font-medium font-display">{challenge.xpReward} XP</span>
           {challenge.completed && !submitted && (
             <span className="text-success-500 text-sm">{t('challenge.alreadyCompleted')}</span>
           )}
           {showNextLevel && (
-            <Link
-              to={`/challenge/${nextChallengeId}`}
-              className="px-5 py-2.5 bg-primary-600 hover:bg-primary-500 text-white font-medium rounded-lg transition-colors inline-flex items-center gap-2"
-            >
+            <Link to={`/challenge/${nextChallengeId}`} className="fantasy-btn text-sm px-4 py-2">
               {t('challenge.nextLevel')}
               <span aria-hidden="true">&rarr;</span>
             </Link>
           )}
           {submitted && !nextChallengeId && worldSlug && (
-            <Link
-              to={`/worlds/${worldSlug}`}
-              className="px-5 py-2.5 bg-primary-600 hover:bg-primary-500 text-white font-medium rounded-lg transition-colors inline-flex items-center gap-2"
-            >
+            <Link to={`/worlds/${worldSlug}`} className="fantasy-btn text-sm px-4 py-2">
               {t('challenge.backToLevels')}
               <span aria-hidden="true">&rarr;</span>
             </Link>
@@ -186,14 +180,14 @@ function ChallengeContent({ challenge }: { challenge: ChallengeData }) {
         </div>
       </div>
 
-      <div className="bg-gray-900 border border-gray-800 rounded-xl p-4">
-        <h2 className="text-sm font-semibold text-gray-400 uppercase mb-2">
+      <div className="fantasy-panel p-4">
+        <h2 className="text-sm font-semibold text-primary-400 uppercase tracking-wider mb-2 font-display">
           {t('challenge.objective')}
         </h2>
-        <p className="text-gray-300">{t(challenge.descriptionKey)}</p>
+        <p className="text-parchment-dim">{t(challenge.descriptionKey)}</p>
       </div>
 
-      <div className="rounded-xl overflow-hidden border border-gray-800">
+      <div className="rounded-lg overflow-hidden border border-primary-900/60 shadow-lg shadow-black/30">
         <SandpackLayout>
           <SandpackCodeEditor style={{ height: '450px' }} showLineNumbers showTabs={false} />
           <SandpackPreview
@@ -204,11 +198,8 @@ function ChallengeContent({ challenge }: { challenge: ChallengeData }) {
         </SandpackLayout>
       </div>
 
-      <div className="flex items-center gap-3">
-        <button
-          onClick={handleRunTests}
-          className="px-6 py-2.5 bg-accent-600 hover:bg-accent-500 text-white font-medium rounded-lg transition-colors"
-        >
+      <div className="flex items-center gap-3 flex-wrap">
+        <button onClick={handleRunTests} className="fantasy-btn-ghost">
           {t('challenge.runTests')}
         </button>
 
@@ -216,22 +207,22 @@ function ChallengeContent({ challenge }: { challenge: ChallengeData }) {
           <button
             onClick={handleSubmit}
             disabled={submitMutation.isPending}
-            className="px-6 py-2.5 bg-success-500 hover:bg-green-400 disabled:opacity-50 text-white font-medium rounded-lg transition-colors"
+            className="fantasy-btn"
           >
             {submitMutation.isPending ? t('common.loading') : t('challenge.submitSolution')}
           </button>
         )}
 
         {submitted && (
-          <span className="text-success-500 text-sm font-medium">
+          <span className="text-success-500 text-sm font-medium font-display">
             {t('challenge.allTestsPassed')}
           </span>
         )}
       </div>
 
       {testResults && (
-        <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 space-y-2">
-          <h3 className="text-sm font-semibold text-gray-400 uppercase">
+        <div className="fantasy-panel p-4 space-y-2">
+          <h3 className="text-sm font-semibold text-primary-400 uppercase tracking-wider font-display">
             {t('challenge.testsPassed', {
               passed: testResults.filter((r) => r.passed).length,
               total: testResults.length,
@@ -245,7 +236,7 @@ function ChallengeContent({ challenge }: { challenge: ChallengeData }) {
               <span>{result.passed ? '✓' : '✗'}</span>
               <span>{result.description}</span>
               {result.message && (
-                <span className="text-gray-500 ml-2">&mdash; {result.message}</span>
+                <span className="text-parchment-dim/60 ml-2">&mdash; {result.message}</span>
               )}
             </div>
           ))}
@@ -264,19 +255,19 @@ function HintsSection({ hints }: { hints: string[] }) {
   const [visibleCount, setVisibleCount] = useState(0);
 
   return (
-    <div className="bg-gray-900 border border-gray-800 rounded-xl p-4">
-      <h3 className="text-sm font-semibold text-gray-400 uppercase mb-2">
+    <div className="fantasy-panel p-4">
+      <h3 className="text-sm font-semibold text-primary-400 uppercase tracking-wider mb-2 font-display">
         {t('challenge.hints')}
       </h3>
       {hints.slice(0, visibleCount).map((hint, i) => (
-        <p key={i} className="text-sm text-gray-400 mb-1">
+        <p key={i} className="text-sm text-parchment-dim mb-1">
           {hint}
         </p>
       ))}
       {visibleCount < hints.length && (
         <button
           onClick={() => setVisibleCount((c) => c + 1)}
-          className="text-sm text-accent-400 hover:text-accent-300 transition-colors mt-1"
+          className="text-sm fantasy-link mt-1"
         >
           {t('challenge.showHint')}
         </button>

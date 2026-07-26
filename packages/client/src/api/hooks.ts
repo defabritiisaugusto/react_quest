@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import api from './client';
-import type { AuthResponseDto } from '@react-quest/shared';
+import type { AuthResponseDto, AvatarConfig } from '@react-quest/shared';
 
 export function useWorlds() {
   return useQuery({
@@ -125,6 +125,27 @@ export function useRegister() {
         password,
       });
       return data;
+    },
+  });
+}
+
+export function useUpdateAvatar() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (avatarConfig: AvatarConfig) => {
+      const { data } = await api.patch('/users/me/avatar', { avatarConfig });
+      return data as {
+        id: string;
+        username: string;
+        email: string;
+        xp: number;
+        level: number;
+        avatarConfig: AvatarConfig;
+      };
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['user'] });
     },
   });
 }

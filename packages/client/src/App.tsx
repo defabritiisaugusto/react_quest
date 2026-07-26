@@ -8,6 +8,7 @@ import { Dashboard } from './pages/Dashboard';
 import { WorldMap } from './pages/WorldMap';
 import { LevelList } from './pages/LevelList';
 import { ChallengePage } from './pages/ChallengePage';
+import { Profile } from './pages/Profile';
 import { GameNotifications } from './components/game/GameNotifications';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -35,6 +36,7 @@ export default function App() {
           <Route path="/worlds" element={<WorldMap />} />
           <Route path="/worlds/:slug" element={<LevelList />} />
           <Route path="/challenge/:id" element={<ChallengePage />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
     </>

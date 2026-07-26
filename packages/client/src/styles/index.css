@@ -1,29 +1,184 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-50: #eff6ff;
-  --color-primary-100: #dbeafe;
-  --color-primary-200: #bfdbfe;
-  --color-primary-300: #93c5fd;
-  --color-primary-400: #60a5fa;
-  --color-primary-500: #3b82f6;
-  --color-primary-600: #2563eb;
-  --color-primary-700: #1d4ed8;
-  --color-primary-800: #1e40af;
-  --color-primary-900: #1e3a8a;
+  --color-primary-50: #f7f1dc;
+  --color-primary-100: #efe2b8;
+  --color-primary-200: #e2c878;
+  --color-primary-300: #d4b04a;
+  --color-primary-400: #c9a227;
+  --color-primary-500: #b8860b;
+  --color-primary-600: #9a7209;
+  --color-primary-700: #7a5a0a;
+  --color-primary-800: #5c440c;
+  --color-primary-900: #3d2e0a;
 
-  --color-accent-400: #a78bfa;
-  --color-accent-500: #8b5cf6;
-  --color-accent-600: #7c3aed;
+  --color-accent-400: #52b788;
+  --color-accent-500: #2d6a4f;
+  --color-accent-600: #1b4332;
 
-  --color-xp-400: #fbbf24;
-  --color-xp-500: #f59e0b;
+  --color-ink-900: #0c1210;
+  --color-ink-800: #121a17;
+  --color-ink-700: #1a2420;
+  --color-ink-600: #24302a;
+  --color-parchment: #e8e4d4;
+  --color-parchment-dim: #cfc8b0;
 
-  --color-success-500: #22c55e;
-  --color-danger-500: #ef4444;
+  --color-xp-400: #e8c547;
+  --color-xp-500: #c9a227;
+
+  --color-success-500: #52b788;
+  --color-danger-500: #c45c4a;
+
+  --font-display: "Cinzel", "Palatino Linotype", serif;
+  --font-body: "Nunito Sans", "Segoe UI", sans-serif;
 }
 
-body {
-  @apply bg-gray-950 text-gray-100 antialiased;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+@layer base {
+  body {
+    color: var(--color-parchment);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: var(--font-body);
+    background-color: var(--color-ink-900);
+    background-image:
+      radial-gradient(ellipse 120% 80% at 50% -20%, rgba(45, 106, 79, 0.28), transparent 55%),
+      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(201, 162, 39, 0.08), transparent 50%),
+      radial-gradient(ellipse 50% 30% at 0% 80%, rgba(45, 106, 79, 0.12), transparent 45%),
+      linear-gradient(180deg, #0c1210 0%, #101816 50%, #0c1210 100%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: 0.02em;
+  }
+
+  ::selection {
+    background: rgba(201, 162, 39, 0.35);
+  }
+}
+
+@layer components {
+  .fantasy-panel {
+    background-color: color-mix(in srgb, var(--color-ink-700) 90%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-primary-800) 60%, transparent);
+    border-radius: 0.5rem;
+    box-shadow:
+      inset 0 1px 0 rgba(232, 228, 212, 0.06),
+      0 0 0 1px rgba(12, 18, 16, 0.4),
+      0 12px 32px rgba(0, 0, 0, 0.35);
+  }
+
+  .fantasy-panel-ornate {
+    position: relative;
+    background-color: color-mix(in srgb, var(--color-ink-700) 90%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-primary-800) 60%, transparent);
+    border-radius: 0.5rem;
+    box-shadow:
+      inset 0 1px 0 rgba(232, 228, 212, 0.06),
+      0 0 0 1px rgba(12, 18, 16, 0.4),
+      0 12px 32px rgba(0, 0, 0, 0.35);
+  }
+
+  .fantasy-panel-ornate::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(201, 162, 39, 0.15);
+    border-radius: 4px;
+    pointer-events: none;
+  }
+
+  .fantasy-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.5rem;
+    font-weight: 600;
+    border-radius: 0.375rem;
+    background-color: var(--color-primary-600);
+    color: var(--color-ink-900);
+    transition: background-color 0.15s ease;
+    font-family: var(--font-display);
+    box-shadow: 0 2px 0 #5c440c, 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .fantasy-btn:hover {
+    background-color: var(--color-primary-400);
+  }
+
+  .fantasy-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .fantasy-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.5rem;
+    font-weight: 600;
+    border-radius: 0.375rem;
+    border: 1px solid color-mix(in srgb, var(--color-primary-700) 70%, transparent);
+    color: var(--color-parchment-dim);
+    background-color: color-mix(in srgb, var(--color-ink-800) 50%, transparent);
+    transition: color 0.15s ease, border-color 0.15s ease;
+    font-family: var(--font-display);
+  }
+
+  .fantasy-btn-ghost:hover {
+    color: var(--color-parchment);
+    border-color: var(--color-primary-400);
+  }
+
+  .fantasy-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.375rem;
+    color: var(--color-parchment);
+    background-color: var(--color-ink-800);
+    border: 1px solid color-mix(in srgb, var(--color-primary-900) 80%, transparent);
+    transition: border-color 0.15s ease;
+  }
+
+  .fantasy-input::placeholder {
+    color: color-mix(in srgb, var(--color-parchment-dim) 40%, transparent);
+  }
+
+  .fantasy-input:focus {
+    outline: none;
+    border-color: var(--color-primary-400);
+  }
+
+  .fantasy-link {
+    color: var(--color-primary-400);
+    transition: color 0.15s ease;
+  }
+
+  .fantasy-link:hover {
+    color: var(--color-primary-300);
+  }
+
+  .fantasy-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-primary-900) 50%, transparent);
+    background-color: color-mix(in srgb, var(--color-ink-800) 85%, transparent);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  }
+
+  .fantasy-badge {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    padding: 0.125rem 0.625rem;
+    border-radius: 0.25rem;
+    border-width: 1px;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+  }
 }

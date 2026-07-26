@@ -27,50 +27,48 @@ export function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4">
-      <div className="w-full max-w-md">
-        <h1 className="text-3xl font-bold text-center mb-2 text-white">{t('auth.loginTitle')}</h1>
-        <p className="text-center text-gray-500 mb-8">
+    <div className="min-h-screen flex items-center justify-center px-4">
+      <div className="w-full max-w-md fantasy-panel-ornate p-8">
+        <h1 className="font-display text-3xl font-bold text-center mb-2 text-parchment">
+          {t('auth.loginTitle')}
+        </h1>
+        <p className="text-center text-parchment-dim mb-8">
           {t('auth.noAccount')}{' '}
-          <Link to="/register" className="text-primary-400 hover:underline">
+          <Link to="/register" className="fantasy-link">
             {t('auth.register')}
           </Link>
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
           {error && (
-            <div className="p-3 bg-danger-500/10 border border-danger-500/30 rounded-lg text-danger-500 text-sm">
+            <div className="p-3 bg-danger-500/10 border border-danger-500/30 rounded-md text-danger-500 text-sm">
               {error}
             </div>
           )}
 
           <div>
-            <label className="block text-sm text-gray-400 mb-1">{t('auth.email')}</label>
+            <label className="block text-sm text-parchment-dim mb-1">{t('auth.email')}</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg text-white focus:outline-none focus:border-primary-500 transition-colors"
+              className="fantasy-input"
             />
           </div>
 
           <div>
-            <label className="block text-sm text-gray-400 mb-1">{t('auth.password')}</label>
+            <label className="block text-sm text-parchment-dim mb-1">{t('auth.password')}</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg text-white focus:outline-none focus:border-primary-500 transition-colors"
+              className="fantasy-input"
             />
           </div>
 
-          <button
-            type="submit"
-            disabled={loginMutation.isPending}
-            className="w-full py-3 bg-primary-600 hover:bg-primary-500 disabled:opacity-50 text-white font-semibold rounded-lg transition-colors"
-          >
+          <button type="submit" disabled={loginMutation.isPending} className="fantasy-btn w-full py-3">
             {loginMutation.isPending ? t('common.loading') : t('auth.login')}
           </button>
         </form>
