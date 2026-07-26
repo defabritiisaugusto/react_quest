@@ -13,7 +13,7 @@
     "@babel/parser": "^8.0.4",
     "@babel/types": "^8.0.4",
     "@codesandbox/sandpack-react": "^2.19.0",
-    "@react-quest/shared": "workspace:*",
+    "@react-quest/shared": "*",
     "@tanstack/react-query": "^5.60.0",
     "axios": "^1.7.0",
     "framer-motion": "^11.12.0",

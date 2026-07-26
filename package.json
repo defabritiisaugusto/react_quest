@@ -10,17 +10,17 @@
     "dev": "npm run dev --workspaces --if-present",
     "dev:client": "npm run dev --workspace @react-quest/client",
     "dev:server": "npm run dev --workspace @react-quest/server",
-    "build": "pnpm --filter @react-quest/shared build && pnpm --parallel --filter !@react-quest/shared -r run build",
-    "build:client": "pnpm --filter @react-quest/shared build && pnpm --filter @react-quest/client build",
-    "build:server": "pnpm --filter @react-quest/shared build && pnpm --filter @react-quest/server build",
-    "lint": "pnpm -r run lint",
-    "db:generate": "pnpm --filter @react-quest/server prisma:generate",
-    "db:migrate": "pnpm --filter @react-quest/server prisma:migrate",
-    "db:seed": "pnpm --filter @react-quest/server prisma:seed",
-    "db:studio": "pnpm --filter @react-quest/server prisma:studio"
+    "build": "npm run build --workspace @react-quest/shared && npm run build --workspace @react-quest/client --workspace @react-quest/server",
+    "build:client": "npm run build --workspace @react-quest/shared && npm run build --workspace @react-quest/client",
+    "build:server": "npm run build --workspace @react-quest/shared && npm run build --workspace @react-quest/server",
+    "lint": "npm run lint --workspaces --if-present",
+    "db:generate": "npm run prisma:generate --workspace @react-quest/server",
+    "db:migrate": "npm run prisma:migrate --workspace @react-quest/server",
+    "db:seed": "npm run prisma:seed --workspace @react-quest/server",
+    "db:studio": "npm run prisma:studio --workspace @react-quest/server"
   },
   "engines": {
     "node": ">=20.0.0",
-    "pnpm": ">=9.0.0"
+    "npm": ">=10.0.0"
   }
 }
