@@ -1,0 +1,77 @@
+{
+  "common": {
+    "loading": "Caricamento...",
+    "error": "Qualcosa è andato storto",
+    "retry": "Riprova",
+    "back": "Indietro",
+    "submit": "Invia",
+    "next": "Avanti",
+    "previous": "Precedente",
+    "save": "Salva",
+    "cancel": "Annulla"
+  },
+  "auth": {
+    "login": "Accedi",
+    "register": "Registrati",
+    "email": "Email",
+    "password": "Password",
+    "username": "Username",
+    "loginTitle": "Bentornato, avventuriero!",
+    "registerTitle": "Inizia la tua quest",
+    "noAccount": "Non hai un account?",
+    "hasAccount": "Hai già un account?",
+    "loginError": "Credenziali non valide",
+    "registerError": "Registrazione fallita"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "worlds": "Mondi",
+    "profile": "Profilo",
+    "logout": "Esci"
+  },
+  "dashboard": {
+    "welcome": "Benvenuto, {{username}}!",
+    "level": "Livello {{level}}",
+    "xp": "{{current}} / {{needed}} XP",
+    "challengesCompleted": "Challenge Completate",
+    "continueQuest": "Continua la tua Quest"
+  },
+  "worlds": {
+    "reactVillage": {
+      "title": "Villaggio React",
+      "desc": "Impara le basi di React: JSX, componenti e props"
+    },
+    "stateForest": {
+      "title": "Foresta dello Stato",
+      "desc": "Padroneggia la gestione dello stato con useState e gli eventi"
+    },
+    "hookDungeon": {
+      "title": "Dungeon degli Hook",
+      "desc": "Immergiti negli hook di React: useEffect, useRef e custom hooks"
+    },
+    "componentKingdom": {
+      "title": "Regno dei Componenti",
+      "desc": "Impara i pattern avanzati e la composizione dei componenti"
+    }
+  },
+  "challenge": {
+    "objective": "Obiettivo",
+    "hints": "Suggerimenti",
+    "showHint": "Mostra Suggerimento",
+    "runTests": "Esegui Test",
+    "submitSolution": "Invia Soluzione",
+    "testsPassed": "{{passed}} / {{total}} test superati",
+    "allTestsPassed": "Tutti i test superati!",
+    "xpEarned": "+{{xp}} XP",
+    "levelUp": "Level Up! Sei al livello {{level}}!",
+    "alreadyCompleted": "Già completata",
+    "reset": "Resetta Codice"
+  },
+  "difficulty": {
+    "BEGINNER": "Principiante",
+    "EASY": "Facile",
+    "MEDIUM": "Medio",
+    "HARD": "Difficile",
+    "EXPERT": "Esperto"
+  }
+}

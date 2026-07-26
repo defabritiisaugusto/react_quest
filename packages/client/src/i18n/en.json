@@ -1,0 +1,77 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "back": "Back",
+    "submit": "Submit",
+    "next": "Next",
+    "previous": "Previous",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "username": "Username",
+    "loginTitle": "Welcome back, adventurer!",
+    "registerTitle": "Begin your quest",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "loginError": "Invalid credentials",
+    "registerError": "Registration failed"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "worlds": "Worlds",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "dashboard": {
+    "welcome": "Welcome, {{username}}!",
+    "level": "Level {{level}}",
+    "xp": "{{current}} / {{needed}} XP",
+    "challengesCompleted": "Challenges Completed",
+    "continueQuest": "Continue Your Quest"
+  },
+  "worlds": {
+    "reactVillage": {
+      "title": "React Village",
+      "desc": "Learn the foundations of React: JSX, components, and props"
+    },
+    "stateForest": {
+      "title": "State Forest",
+      "desc": "Master state management with useState and events"
+    },
+    "hookDungeon": {
+      "title": "Hook Dungeon",
+      "desc": "Dive deep into React hooks: useEffect, useRef, and custom hooks"
+    },
+    "componentKingdom": {
+      "title": "Component Kingdom",
+      "desc": "Learn advanced component patterns and composition"
+    }
+  },
+  "challenge": {
+    "objective": "Objective",
+    "hints": "Hints",
+    "showHint": "Show Hint",
+    "runTests": "Run Tests",
+    "submitSolution": "Submit Solution",
+    "testsPassed": "{{passed}} / {{total}} tests passed",
+    "allTestsPassed": "All tests passed!",
+    "xpEarned": "+{{xp}} XP",
+    "levelUp": "Level Up! You're now level {{level}}!",
+    "alreadyCompleted": "Already completed",
+    "reset": "Reset Code"
+  },
+  "difficulty": {
+    "BEGINNER": "Beginner",
+    "EASY": "Easy",
+    "MEDIUM": "Medium",
+    "HARD": "Hard",
+    "EXPERT": "Expert"
+  }
+}

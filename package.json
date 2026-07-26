@@ -1,0 +1,26 @@
+{
+  "name": "react-quest",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Gamified React learning platform",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces --if-present",
+    "dev:client": "npm run dev --workspace @react-quest/client",
+    "dev:server": "npm run dev --workspace @react-quest/server",
+    "build": "pnpm --filter @react-quest/shared build && pnpm --parallel --filter !@react-quest/shared -r run build",
+    "build:client": "pnpm --filter @react-quest/shared build && pnpm --filter @react-quest/client build",
+    "build:server": "pnpm --filter @react-quest/shared build && pnpm --filter @react-quest/server build",
+    "lint": "pnpm -r run lint",
+    "db:generate": "pnpm --filter @react-quest/server prisma:generate",
+    "db:migrate": "pnpm --filter @react-quest/server prisma:migrate",
+    "db:seed": "pnpm --filter @react-quest/server prisma:seed",
+    "db:studio": "pnpm --filter @react-quest/server prisma:studio"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}

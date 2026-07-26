@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Difficulty {
+  BEGINNER
+  EASY
+  MEDIUM
+  HARD
+  EXPERT
+}
+
+model User {
+  id           String   @id @default(cuid())
+  username     String   @unique
+  email        String   @unique
+  passwordHash String
+  xp           Int      @default(0)
+  level        Int      @default(1)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  progress     Progress[]
+  achievements UserAchievement[]
+}
+
+model World {
+  id       String  @id @default(cuid())
+  slug     String  @unique
+  titleKey String
+  descKey  String
+  order    Int     @unique
+  iconUrl  String?
+  unlockXp Int     @default(0)
+
+  levels Level[]
+}
+
+model Level {
+  id         String     @id @default(cuid())
+  worldId    String
+  titleKey   String
+  descKey    String
+  order      Int
+  difficulty Difficulty @default(BEGINNER)
+
+  world      World       @relation(fields: [worldId], references: [id], onDelete: Cascade)
+  challenges Challenge[]
+
+  @@unique([worldId, order])
+}
+
+model Challenge {
+  id              String @id @default(cuid())
+  levelId         String
+  titleKey        String
+  descriptionKey  String
+  initialCode     String
+  solutionCode    String
+  expectedConcept String
+  tests           Json
+  hints           Json?
+  xpReward        Int    @default(100)
+  order           Int
+
+  level    Level      @relation(fields: [levelId], references: [id], onDelete: Cascade)
+  progress Progress[]
+
+  @@unique([levelId, order])
+}
+
+model Progress {
+  id          String    @id @default(cuid())
+  userId      String
+  challengeId String
+  completed   Boolean   @default(false)
+  userCode    String?
+  score       Int       @default(0)
+  attempts    Int       @default(0)
+  completedAt DateTime?
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  challenge Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, challengeId])
+}
+
+model Achievement {
+  id        String @id @default(cuid())
+  slug      String @unique
+  nameKey   String
+  descKey   String
+  icon      String
+  condition Json
+
+  users UserAchievement[]
+}
+
+model UserAchievement {
+  userId        String
+  achievementId String
+  unlockedAt    DateTime @default(now())
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievement Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+
+  @@id([userId, achievementId])
+}
