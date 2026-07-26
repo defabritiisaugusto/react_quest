@@ -26,7 +26,9 @@
     "noAccount": "Non hai un account?",
     "hasAccount": "Hai già un account?",
     "loginError": "Credenziali non valide",
-    "registerError": "Registrazione fallita"
+    "registerError": "Registrazione fallita",
+    "showPassword": "Mostra password",
+    "hidePassword": "Nascondi password"
   },
   "nav": {
     "dashboard": "Sala dell'Eroe",
@@ -67,7 +69,39 @@
   },
   "levels": {
     "start": "Inizia",
-    "replay": "Rigioca"
+    "replay": "Rigioca",
+    "jsxBasics": {
+      "title": "I Sacri Glifi del JSX",
+      "desc": "Incidi le rune JSX — il markup incantato che dà vita a React"
+    },
+    "components": {
+      "title": "La Fucina dei Componenti",
+      "desc": "Forgia componenti riusabili, i mattoni di ogni quest"
+    },
+    "propsAndRendering": {
+      "title": "I Riti di Props e Rendering",
+      "desc": "Passa le props e rivela contenuti con rendering condizionale e liste"
+    },
+    "useState": {
+      "title": "Il Pozzo Vivente dello Stato",
+      "desc": "Risveglia useState affinché la UI cambi al ritmo dell'avventura"
+    },
+    "formsAndEvents": {
+      "title": "I Rotoli di Form ed Eventi",
+      "desc": "Legami gli input, cattura eventi e condividi lo stato tra compagni"
+    },
+    "useEffect": {
+      "title": "La Camera degli Echi degli Effect",
+      "desc": "Comanda useEffect per missioni collaterali: fetch, timer e cleanup"
+    },
+    "advancedHooks": {
+      "title": "Le Reliquie degli Hook Avanzati",
+      "desc": "Brandisci useRef e forgia i tuoi custom hook"
+    },
+    "patterns": {
+      "title": "I Pattern Reali della Composizione",
+      "desc": "Governa con children, slot e render props come un sovrano"
+    }
   },
   "worlds": {
     "reactVillage": {
@@ -89,6 +123,8 @@
   },
   "challenge": {
     "objective": "Obiettivo",
+    "codex": "Codex",
+    "example": "Esempio",
     "hints": "Suggerimenti",
     "showHint": "Mostra Suggerimento",
     "runTests": "Esegui Test",
@@ -101,6 +137,368 @@
     "nextLevel": "Livello successivo",
     "backToLevels": "Torna ai livelli",
     "reset": "Resetta Codice"
+  },
+  "challenges": {
+    "helloReact": {
+      "title": "Il Primo Saluto",
+      "desc": "Renderizza il testo \"Hello, React!\" dentro un elemento h1.",
+      "docs": {
+        "summary": "JSX è il linguaggio dell'interfaccia React. Sembra HTML, ma vive dentro JavaScript e viene compilato in chiamate a React.createElement.",
+        "concepts": [
+          {
+            "title": "Elementi JSX",
+            "text": "Scrivi tag come <h1>…</h1> nel componente. I nomi dei tag HTML restano in minuscolo."
+          },
+          {
+            "title": "return",
+            "text": "Un componente deve restituire JSX. Per return su più righe usa le parentesi: return ( <h1>…</h1> );"
+          }
+        ],
+        "example": "return (\n  <h1>Hello, React!</h1>\n);"
+      }
+    },
+    "multipleElements": {
+      "title": "Glifi Gemelli",
+      "desc": "Restituisci sia un h1 (\"Title\") sia un p (\"Description\") dallo stesso componente.",
+      "docs": {
+        "summary": "Un componente può restituire un solo nodo radice. Per avere fratelli, avvolgili in un Fragment.",
+        "concepts": [
+          {
+            "title": "Una sola radice",
+            "text": "return ( <h1/><p/> ) non è JSX valido. Elementi adiacenti servono un genitore."
+          },
+          {
+            "title": "Fragment",
+            "text": "Usa <>…</> (o <React.Fragment>) per raggruppare senza aggiungere un nodo DOM extra."
+          }
+        ],
+        "example": "return (\n  <>\n    <h1>Title</h1>\n    <p>Description</p>\n  </>\n);"
+      }
+    },
+    "firstComponent": {
+      "title": "Nascita di un Componente",
+      "desc": "Definisci un componente Greeting e renderizzalo da App.",
+      "docs": {
+        "summary": "I componenti sono funzioni che restituiscono JSX. Sono i mattoni riusabili di ogni app React.",
+        "concepts": [
+          {
+            "title": "Function component",
+            "text": "function Greeting() { return <h1>Hello!</h1>; } — il nome deve iniziare con la maiuscola."
+          },
+          {
+            "title": "Usare un componente",
+            "text": "Renderizzalo come un elemento: <Greeting />. React chiama la funzione e inserisce il JSX restituito."
+          }
+        ],
+        "example": "function Greeting() {\n  return <h1>Hello!</h1>;\n}\n\nexport default function App() {\n  return <Greeting />;\n}"
+      }
+    },
+    "propsIntro": {
+      "title": "I Doni delle Props",
+      "desc": "Crea un UserCard che accetta le props name e role e le mostra.",
+      "docs": {
+        "summary": "Le props sono input che passi a un componente, come attributi HTML. Fluiscono in una sola direzione: genitore → figlio.",
+        "concepts": [
+          {
+            "title": "Passare le props",
+            "text": "<UserCard name=\"Alice\" role=\"Developer\" /> invia due stringhe a UserCard."
+          },
+          {
+            "title": "Leggere le props",
+            "text": "Destrutturale nei parametri: function UserCard({ name, role }) { … }"
+          }
+        ],
+        "example": "function UserCard({ name, role }) {\n  return (\n    <div>\n      <h3>{name}</h3>\n      <p>{role}</p>\n    </div>\n  );\n}"
+      }
+    },
+    "dynamicContent": {
+      "title": "Espressioni Viventi",
+      "desc": "Incorpora espressioni JavaScript nel JSX per mostrare valori dinamici.",
+      "docs": {
+        "summary": "Le graffe { } aprono un passaggio dal JSX a JavaScript. Ciò che c'è dentro viene valutato e renderizzato.",
+        "concepts": [
+          {
+            "title": "Espressioni in JSX",
+            "text": "Usa {variabile}, {1 + 2} o {fn()} — qualsiasi espressione, non uno statement completo."
+          },
+          {
+            "title": "Cosa viene renderizzato",
+            "text": "Numeri e stringhe diventano testo. Booleani, null e undefined non mostrano nulla."
+          }
+        ],
+        "example": "const name = 'Ada';\nreturn <h1>Hello, {name}!</h1>;"
+      }
+    },
+    "conditionalRendering": {
+      "title": "I Bivi del Destino",
+      "desc": "Mostra UI diversa in base a una condizione.",
+      "docs": {
+        "summary": "Il rendering condizionale fa apparire o scomparire pezzi di UI in base ai dati — come scegliere un sentiero al bivio.",
+        "concepts": [
+          {
+            "title": "Operatore ternario",
+            "text": "{isLoggedIn ? <Dashboard /> : <Login />} sceglie uno dei due rami."
+          },
+          {
+            "title": "Logical &&",
+            "text": "{hasError && <p>Error</p>} renderizza la destra solo se la sinistra è truthy."
+          }
+        ],
+        "example": "{isOnline ? <p>Online</p> : <p>Offline</p>}"
+      }
+    },
+    "listRendering": {
+      "title": "La Marcia delle Liste",
+      "desc": "Trasforma un array in una lista di elementi JSX con map.",
+      "docs": {
+        "summary": "Le liste in React nascono dai dati. map() trasforma ogni elemento in JSX da renderizzare.",
+        "concepts": [
+          {
+            "title": "array.map",
+            "text": "items.map(item => <li>{item}</li>) restituisce un array di JSX che React mostra in ordine."
+          },
+          {
+            "title": "Prop key",
+            "text": "Dai a ogni fratello una key stabile e unica (spesso un id) così React traccia i cambiamenti."
+          }
+        ],
+        "example": "{users.map(user => (\n  <li key={user.id}>{user.name}</li>\n))}"
+      }
+    },
+    "composition": {
+      "title": "L'Assemblea degli Alleati",
+      "desc": "Dividi la UI in Header, Content e Footer e componili in App.",
+      "docs": {
+        "summary": "Comporre significa costruire UI complesse da componenti piccoli. Ogni pezzo ha un solo compito.",
+        "concepts": [
+          {
+            "title": "Componenti piccoli",
+            "text": "Header, Content e Footer restituiscono ciascuno il proprio JSX. App li mette insieme."
+          },
+          {
+            "title": "Perché comporre",
+            "text": "Pezzi piccoli sono più leggibili, riusabili e testabili di un unico gigante."
+          }
+        ],
+        "example": "function App() {\n  return (\n    <>\n      <Header />\n      <Content />\n      <Footer />\n    </>\n  );\n}"
+      }
+    },
+    "brokenCounter": {
+      "title": "Il Contatore Spezzato",
+      "desc": "Sistema il contatore così che il click aggiorni il numero con useState.",
+      "docs": {
+        "summary": "Le variabili locali non sopravvivono ai re-render e non dicono a React di aggiornare lo schermo. Lo state fa entrambe le cose.",
+        "concepts": [
+          {
+            "title": "useState",
+            "text": "const [count, setCount] = useState(0) ti dà il valore corrente e il setter."
+          },
+          {
+            "title": "Aggiornare lo state",
+            "text": "Chiama setCount(nuovoValore) (o setCount(prev => prev + 1)). React re-renderizza con il nuovo valore."
+          }
+        ],
+        "example": "const [count, setCount] = useState(0);\n\n<button onClick={() => setCount(count + 1)}>\n  {count}\n</button>"
+      }
+    },
+    "toggleSwitch": {
+      "title": "L'Interruttore",
+      "desc": "Usa state booleano per accendere e spegnere la UI.",
+      "docs": {
+        "summary": "Lo state booleano è perfetto per switch, modal e menu — tutto ciò che è acceso o spento.",
+        "concepts": [
+          {
+            "title": "useState booleano",
+            "text": "const [isOn, setIsOn] = useState(false) memorizza un flag true/false."
+          },
+          {
+            "title": "Toggle",
+            "text": "setIsOn(!isOn) oppure setIsOn(prev => !prev) inverte il valore in sicurezza."
+          }
+        ],
+        "example": "const [isOn, setIsOn] = useState(false);\n<button onClick={() => setIsOn(prev => !prev)}>\n  {isOn ? 'ON' : 'OFF'}\n</button>"
+      }
+    },
+    "controlledInput": {
+      "title": "L'Input Vincolato",
+      "desc": "Rendi un input controlled: il value viene dallo state, aggiornato a ogni change.",
+      "docs": {
+        "summary": "Un input controlled è guidato interamente dallo state di React. L'input non tiene un valore segreto per conto suo.",
+        "concepts": [
+          {
+            "title": "value + onChange",
+            "text": "Collega value={text} e onChange={(e) => setText(e.target.value)} così state e input restano allineati."
+          },
+          {
+            "title": "Unica fonte di verità",
+            "text": "Lo state possiede il testo. Validazione, formattazione e condivisione del valore diventano più semplici."
+          }
+        ],
+        "example": "const [text, setText] = useState('');\n<input\n  value={text}\n  onChange={(e) => setText(e.target.value)}\n/>"
+      }
+    },
+    "formHandling": {
+      "title": "Il Rotolo della Submission",
+      "desc": "Crea un form con campi name ed email controlled e gestisci il submit.",
+      "docs": {
+        "summary": "I form uniscono input controlled e un handler onSubmit. Previeni sempre il reload di default del browser.",
+        "concepts": [
+          {
+            "title": "onSubmit",
+            "text": "Metti onSubmit sul <form>. Nell'handler chiama e.preventDefault()."
+          },
+          {
+            "title": "Più campi",
+            "text": "Di solito ogni campo ha il proprio pezzo di state (oppure un unico oggetto per tutto il form)."
+          }
+        ],
+        "example": "function handleSubmit(e) {\n  e.preventDefault();\n  // usa name & email dallo state\n}"
+      }
+    },
+    "liftingState": {
+      "title": "Sollevare la Fiamma Condivisa",
+      "desc": "Solleva lo state condiviso così due input fratelli restano sincronizzati.",
+      "docs": {
+        "summary": "Quando due figli servono gli stessi dati, sposta quello state nel genitore comune più vicino e passalo in basso come props.",
+        "concepts": [
+          {
+            "title": "Lifting state up",
+            "text": "Il genitore possiede lo state. I figli ricevono valori e setter (o callback) via props."
+          },
+          {
+            "title": "Fonte unica",
+            "text": "Un solo pezzo di state evita che i fratelli vadano fuori sync."
+          }
+        ],
+        "example": "function Parent() {\n  const [value, setValue] = useState('');\n  return (\n    <>\n      <ChildA value={value} onChange={setValue} />\n      <ChildB value={value} onChange={setValue} />\n    </>\n  );\n}"
+      }
+    },
+    "stateFromProps": {
+      "title": "La Scintilla Iniziale",
+      "desc": "Inizializza lo state da una prop — sapendo che vale solo al primo render.",
+      "docs": {
+        "summary": "useState(propValue) usa la prop solo come valore iniziale. I cambi successivi della prop non riscrivono automaticamente quello state.",
+        "concepts": [
+          {
+            "title": "State iniziale",
+            "text": "const [text, setText] = useState(initialText) copia initialText una volta al mount."
+          },
+          {
+            "title": "Props vs state",
+            "text": "Se ti serve restare in sync con una prop che cambia, derivane il valore in render o aggiorna con un effect — ma per campi editabili, state locale da una prop iniziale è spesso corretto."
+          }
+        ],
+        "example": "function EditableText({ initialValue }) {\n  const [value, setValue] = useState(initialValue);\n  return <input value={value} onChange={(e) => setValue(e.target.value)} />;\n}"
+      }
+    },
+    "dataFetcher": {
+      "title": "La Visione del Fetch",
+      "desc": "Recupera dati al mount con useEffect e salvali nello state.",
+      "docs": {
+        "summary": "useEffect esegue side effect dopo il paint — ideale per fetch, subscription e tutto ciò che parla col mondo esterno.",
+        "concepts": [
+          {
+            "title": "Effect solo al mount",
+            "text": "useEffect(() => { … }, []) gira una volta dopo il primo render perché l'array delle dipendenze è vuoto."
+          },
+          {
+            "title": "Fetch → state",
+            "text": "Carica i dati nell'effect, poi setState con il risultato così la UI può mostrarli."
+          }
+        ],
+        "example": "useEffect(() => {\n  fetch('/api/user')\n    .then(res => res.json())\n    .then(data => setUser(data));\n}, []);"
+      }
+    },
+    "cleanupEffect": {
+      "title": "Il Rito del Cleanup",
+      "desc": "Avvia un interval in useEffect e puliscilo per evitare leak.",
+      "docs": {
+        "summary": "Gli effect che avviano qualcosa di continuo (timer, listener) devono anche fermarlo. Restituisci una funzione di cleanup da useEffect.",
+        "concepts": [
+          {
+            "title": "Funzione di cleanup",
+            "text": "return () => clearInterval(id) gira allo smontaggio o prima che l'effect si ripeta."
+          },
+          {
+            "title": "Perché conta",
+            "text": "Senza cleanup gli interval continuano dopo che il componente è sparito — memory leak e aggiornamenti fantasma."
+          }
+        ],
+        "example": "useEffect(() => {\n  const id = setInterval(() => setTick(t => t + 1), 1000);\n  return () => clearInterval(id);\n}, []);"
+      }
+    },
+    "domReference": {
+      "title": "Lo Specchio del DOM",
+      "desc": "Usa useRef per prendere un nodo DOM e metterci il focus.",
+      "docs": {
+        "summary": "useRef tiene un valore mutabile .current che persiste tra i render senza causarli. Con la prop ref punta a un elemento DOM.",
+        "concepts": [
+          {
+            "title": "Creare un ref",
+            "text": "const inputRef = useRef(null) crea l'oggetto ref."
+          },
+          {
+            "title": "Attaccare e usare",
+            "text": "Metti ref={inputRef} sull'elemento, poi chiama inputRef.current.focus() quando ti serve il nodo."
+          }
+        ],
+        "example": "const inputRef = useRef(null);\n\nuseEffect(() => {\n  inputRef.current?.focus();\n}, []);\n\n<input ref={inputRef} />"
+      }
+    },
+    "customHook": {
+      "title": "Forgia il Tuo Hook",
+      "desc": "Estrai la logica di toggle in un custom hook riusabile useToggle.",
+      "docs": {
+        "summary": "I custom hook ti fanno riusare logica con state. Sono funzioni normali il cui nome inizia con use e che possono chiamare altri hook.",
+        "concepts": [
+          {
+            "title": "Naming",
+            "text": "Inizia sempre con use (useToggle, useFetch) così valgono le regole degli hook di React."
+          },
+          {
+            "title": "Restituisci ciò che serve",
+            "text": "Restituisci una tupla o un oggetto — es. [value, toggle] — per tenere i componenti puliti."
+          }
+        ],
+        "example": "function useToggle(initial = false) {\n  const [on, setOn] = useState(initial);\n  const toggle = () => setOn(v => !v);\n  return [on, toggle];\n}"
+      }
+    },
+    "slotPattern": {
+      "title": "Lo Slot dei Children",
+      "desc": "Costruisci una Card che mostra un titolo e il contenuto children.",
+      "docs": {
+        "summary": "children è una prop speciale: tutto ciò che metti tra i tag di apertura e chiusura arriva automaticamente.",
+        "concepts": [
+          {
+            "title": "Prop children",
+            "text": "function Card({ title, children }) riceve il JSX annidato come children."
+          },
+          {
+            "title": "Slot",
+            "text": "Renderizza {children} dove deve apparire il contenuto — un pattern di composizione flessibile."
+          }
+        ],
+        "example": "function Card({ title, children }) {\n  return (\n    <div>\n      {title && <h3>{title}</h3>}\n      {children}\n    </div>\n  );\n}"
+      }
+    },
+    "renderProps": {
+      "title": "Il Patto del Render Prop",
+      "desc": "Usa un render prop così il genitore decide come mostrare i dati del mouse.",
+      "docs": {
+        "summary": "Un render prop è una prop-funzione che restituisce JSX. Il figlio la chiama con i dati; il genitore decide la UI.",
+        "concepts": [
+          {
+            "title": "Funzione come prop",
+            "text": "Passa render={(pos) => <p>{pos.x}, {pos.y}</p>} (oppure children come funzione)."
+          },
+          {
+            "title": "Inversione di controllo",
+            "text": "Il componente riusabile possiede il comportamento (tracciare il mouse); il genitore possiede la presentazione."
+          }
+        ],
+        "example": "<MouseTracker\n  render={({ x, y }) => <p>{x}, {y}</p>}\n/>"
+      }
+    }
   },
   "difficulty": {
     "BEGINNER": "Principiante",

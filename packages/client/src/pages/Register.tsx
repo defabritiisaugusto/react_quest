@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useRegister } from '../api/hooks';
+import { PasswordInput } from '../components/ui/PasswordInput';
 import { useAuthStore } from '../stores/auth-store';
 
 export function Register() {
@@ -73,13 +74,12 @@ export function Register() {
 
           <div>
             <label className="block text-sm text-parchment-dim mb-1">{t('auth.password')}</label>
-            <input
-              type="password"
+            <PasswordInput
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={setPassword}
               required
               minLength={8}
-              className="fantasy-input"
+              autoComplete="new-password"
             />
           </div>
 

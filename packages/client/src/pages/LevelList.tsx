@@ -16,7 +16,7 @@ export function LevelList() {
       <Link to="/worlds" className="text-sm text-parchment-dim hover:text-primary-300 transition-colors mb-4 inline-block">
         ← {t('common.back')}
       </Link>
-      <h1 className="text-3xl font-bold mb-8 text-parchment">
+      <h1 className="font-display text-3xl font-bold mb-8 text-parchment">
         {t(`worlds.${toCamelCase(slug!)}.title`)}
       </h1>
 

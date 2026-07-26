@@ -243,8 +243,62 @@ function ChallengeContent({ challenge }: { challenge: ChallengeData }) {
         </div>
       )}
 
+      <CodexSection descriptionKey={challenge.descriptionKey} />
+
       {challenge.hints && challenge.hints.length > 0 && (
         <HintsSection hints={challenge.hints} />
+      )}
+    </div>
+  );
+}
+
+type ChallengeDocs = {
+  summary: string;
+  concepts: { title: string; text: string }[];
+  example?: string;
+};
+
+function CodexSection({ descriptionKey }: { descriptionKey: string }) {
+  const { t, i18n } = useTranslation();
+  const docsKey = descriptionKey.replace(/\.desc$/, '.docs');
+  const docs = t(docsKey, { returnObjects: true }) as ChallengeDocs | string;
+
+  if (!docs || typeof docs === 'string' || !docs.summary) {
+    return null;
+  }
+
+  return (
+    <div className="fantasy-panel p-4 space-y-4">
+      <h3 className="text-sm font-semibold text-primary-400 uppercase tracking-wider font-display">
+        {t('challenge.codex')}
+      </h3>
+      <p className="text-sm text-parchment-dim leading-relaxed">{docs.summary}</p>
+
+      {Array.isArray(docs.concepts) && docs.concepts.length > 0 && (
+        <dl className="space-y-3">
+          {docs.concepts.map((concept) => (
+            <div key={concept.title}>
+              <dt className="text-sm font-semibold text-parchment font-display mb-0.5">
+                {concept.title}
+              </dt>
+              <dd className="text-sm text-parchment-dim leading-relaxed">{concept.text}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+
+      {docs.example && (
+        <div>
+          <p className="text-xs font-semibold text-primary-400 uppercase tracking-wider mb-2 font-display">
+            {t('challenge.example')}
+          </p>
+          <pre
+            key={i18n.language}
+            className="text-xs leading-relaxed overflow-x-auto rounded-md bg-ink-900/80 border border-primary-900/50 p-3 text-accent-400 font-mono whitespace-pre"
+          >
+            <code>{docs.example}</code>
+          </pre>
+        </div>
       )}
     </div>
   );

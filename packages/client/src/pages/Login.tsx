@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLogin } from '../api/hooks';
+import { PasswordInput } from '../components/ui/PasswordInput';
 import { useAuthStore } from '../stores/auth-store';
 
 export function Login() {
@@ -59,12 +60,11 @@ export function Login() {
 
           <div>
             <label className="block text-sm text-parchment-dim mb-1">{t('auth.password')}</label>
-            <input
-              type="password"
+            <PasswordInput
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={setPassword}
               required
-              className="fantasy-input"
+              autoComplete="current-password"
             />
           </div>
 
