@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import confetti from 'canvas-confetti';
 import {
   SandpackProvider,
   SandpackLayout,
@@ -14,6 +15,29 @@ import { useGameStore } from '../stores/game-store';
 import { runEvaluation } from '../lib/evaluation/evaluator';
 import type { ChallengeTestDefinition } from '@react-quest/shared';
 
+function fireSuccessConfetti() {
+  confetti({
+    particleCount: 100,
+    spread: 70,
+    origin: { y: 0.65 },
+    colors: ['#22c55e', '#4ade80', '#fbbf24', '#60a5fa', '#f472b6'],
+  });
+  confetti({
+    particleCount: 50,
+    angle: 60,
+    spread: 55,
+    origin: { x: 0, y: 0.7 },
+    colors: ['#22c55e', '#fbbf24', '#60a5fa'],
+  });
+  confetti({
+    particleCount: 50,
+    angle: 120,
+    spread: 55,
+    origin: { x: 1, y: 0.7 },
+    colors: ['#22c55e', '#fbbf24', '#60a5fa'],
+  });
+}
+
 export function ChallengePage() {
   const { id } = useParams<{ id: string }>();
   const { t } = useTranslation();
@@ -25,6 +49,7 @@ export function ChallengePage() {
 
   return (
     <SandpackProvider
+      key={challenge.id}
       template="react"
       theme="dark"
       files={{ '/App.js': { code: challenge.initialCode, active: true } }}
@@ -59,6 +84,13 @@ function ChallengeContent({ challenge }: { challenge: ChallengeData }) {
     { description: string; passed: boolean; message?: string }[] | null
   >(null);
   const [submitted, setSubmitted] = useState(false);
+  const [nextChallengeId, setNextChallengeId] = useState<string | null>(null);
+
+  useEffect(() => {
+    setTestResults(null);
+    setSubmitted(false);
+    setNextChallengeId(null);
+  }, [challenge.id]);
 
   const handleRunTests = useCallback(() => {
     const results = runEvaluation(code, challenge.tests);
@@ -84,6 +116,11 @@ function ChallengeContent({ challenge }: { challenge: ChallengeData }) {
 
       setSubmitted(true);
 
+      if (passed) {
+        fireSuccessConfetti();
+        setNextChallengeId(result.nextChallengeId ?? null);
+      }
+
       if (result.xpEarned > 0) {
         addNotification({
           type: 'xp',
@@ -106,6 +143,8 @@ function ChallengeContent({ challenge }: { challenge: ChallengeData }) {
   }, [challenge.id, testResults, code, submitMutation, addNotification, updateUser, t]);
 
   const allPassed = testResults?.every((r) => r.passed) ?? false;
+  const showNextLevel = submitted && !!nextChallengeId;
+  const worldSlug = challenge.level?.world?.slug;
 
   return (
     <div className="space-y-4">
@@ -121,10 +160,28 @@ function ChallengeContent({ challenge }: { challenge: ChallengeData }) {
           )}
           <h1 className="text-2xl font-bold mt-1">{t(challenge.titleKey)}</h1>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <span className="text-xp-400 font-medium">{challenge.xpReward} XP</span>
-          {challenge.completed && (
+          {challenge.completed && !submitted && (
             <span className="text-success-500 text-sm">{t('challenge.alreadyCompleted')}</span>
+          )}
+          {showNextLevel && (
+            <Link
+              to={`/challenge/${nextChallengeId}`}
+              className="px-5 py-2.5 bg-primary-600 hover:bg-primary-500 text-white font-medium rounded-lg transition-colors inline-flex items-center gap-2"
+            >
+              {t('challenge.nextLevel')}
+              <span aria-hidden="true">&rarr;</span>
+            </Link>
+          )}
+          {submitted && !nextChallengeId && worldSlug && (
+            <Link
+              to={`/worlds/${worldSlug}`}
+              className="px-5 py-2.5 bg-primary-600 hover:bg-primary-500 text-white font-medium rounded-lg transition-colors inline-flex items-center gap-2"
+            >
+              {t('challenge.backToLevels')}
+              <span aria-hidden="true">&rarr;</span>
+            </Link>
           )}
         </div>
       </div>
@@ -163,6 +220,12 @@ function ChallengeContent({ challenge }: { challenge: ChallengeData }) {
           >
             {submitMutation.isPending ? t('common.loading') : t('challenge.submitSolution')}
           </button>
+        )}
+
+        {submitted && (
+          <span className="text-success-500 text-sm font-medium">
+            {t('challenge.allTestsPassed')}
+          </span>
         )}
       </div>
 

@@ -30,6 +30,7 @@ export interface SubmitResultDto {
   testResults: TestResultDto[];
   levelUp: boolean;
   newLevel: number | null;
+  nextChallengeId: string | null;
 }
 
 export interface TestResultDto {

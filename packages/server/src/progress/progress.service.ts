@@ -63,7 +63,38 @@ export class ProgressService {
       }
     }
 
-    return { passed, score, xpEarned, levelUp, newLevel };
+    const nextChallengeId = passed ? await this.findNextChallengeId(challenge) : null;
+
+    return { passed, score, xpEarned, levelUp, newLevel, nextChallengeId };
+  }
+
+  private async findNextChallengeId(challenge: {
+    id: string;
+    levelId: string;
+    order: number;
+  }): Promise<string | null> {
+    const nextInLevel = await this.prisma.challenge.findFirst({
+      where: { levelId: challenge.levelId, order: { gt: challenge.order } },
+      orderBy: { order: 'asc' },
+      select: { id: true },
+    });
+    if (nextInLevel) return nextInLevel.id;
+
+    const level = await this.prisma.level.findUnique({
+      where: { id: challenge.levelId },
+      select: { worldId: true, order: true },
+    });
+    if (!level) return null;
+
+    const nextLevel = await this.prisma.level.findFirst({
+      where: { worldId: level.worldId, order: { gt: level.order } },
+      orderBy: { order: 'asc' },
+      include: {
+        challenges: { orderBy: { order: 'asc' }, take: 1, select: { id: true } },
+      },
+    });
+
+    return nextLevel?.challenges[0]?.id ?? null;
   }
 
   async getUserProgress(userId: string) {

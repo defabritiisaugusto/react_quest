@@ -65,6 +65,8 @@
     "xpEarned": "+{{xp}} XP",
     "levelUp": "Level Up! Sei al livello {{level}}!",
     "alreadyCompleted": "Già completata",
+    "nextLevel": "Livello successivo",
+    "backToLevels": "Torna ai livelli",
     "reset": "Resetta Codice"
   },
   "difficulty": {
